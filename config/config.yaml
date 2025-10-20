@@ -1,0 +1,38 @@
+# config.yaml
+
+target_column: Class
+
+outlier_method:
+  enabled: false
+  method: iqr
+  lower_quantile: 0.01
+  upper_quantile: 0.99
+
+missing_method: drop        # drop / mean / median / mode
+
+scaling:
+  enabled: true
+  method: standard          # standard / minmax / robust / quantile_uniform
+
+balancing:
+  method: smote             # smote / ros / rus / smiteenn / smotetomek / none
+  random_state: 42
+  smote_params:
+    sampling_strategy: 0.3 # float (0-1), 'minority', 'not minority', 'all', or dict for class counts
+    k_neighbors: 5
+  ros_params:
+    sampling_strategy: auto
+  rus_params:
+    sampling_strategy: auto
+
+paths:
+  train: "data/Raw/train.csv"
+  val: "data/Raw/val.csv"
+  test: "data/Raw/test.csv"
+
+
+logging:
+  level: INFO
+  save_logs: true
+  log_dir: "logs/"
+

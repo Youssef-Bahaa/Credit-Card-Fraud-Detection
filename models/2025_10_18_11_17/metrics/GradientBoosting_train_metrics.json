@@ -1,0 +1,37 @@
+{
+    "model": "GradientBoosting_train",
+    "accuracy": 0.9999675154006532,
+    "precision": 0.9999350350220291,
+    "recall": 1.0,
+    "f1score": 0.9999675164558681,
+    "roc_auc": 0.9999691559381452,
+    "PR_AUC": 0.9999624314197333,
+    "best_threshold": 0.766905636901765,
+    "classification report": {
+        "0": {
+            "precision": 1.0,
+            "recall": 0.9999350308013065,
+            "f1-score": 0.9999675143453698,
+            "support": 169311.0
+        },
+        "1": {
+            "precision": 0.9999350350220291,
+            "recall": 1.0,
+            "f1-score": 0.9999675164558681,
+            "support": 169311.0
+        },
+        "accuracy": 0.9999675154006532,
+        "macro avg": {
+            "precision": 0.9999675175110145,
+            "recall": 0.9999675154006533,
+            "f1-score": 0.9999675154006189,
+            "support": 338622.0
+        },
+        "weighted avg": {
+            "precision": 0.9999675175110145,
+            "recall": 0.9999675154006532,
+            "f1-score": 0.9999675154006189,
+            "support": 338622.0
+        }
+    }
+}

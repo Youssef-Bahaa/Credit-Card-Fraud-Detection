@@ -1,0 +1,37 @@
+{
+    "model": "KNN_train",
+    "accuracy": 0.9995033472631202,
+    "precision": 0.9990076802029265,
+    "recall": 1.0,
+    "f1score": 0.9995035938046157,
+    "roc_auc": 1.0,
+    "PR_AUC": 1.0,
+    "best_threshold": 1.0,
+    "classification report": {
+        "0": {
+            "precision": 1.0,
+            "recall": 0.9990066945262404,
+            "f1-score": 0.999503100476612,
+            "support": 170139.0
+        },
+        "1": {
+            "precision": 0.9990076802029265,
+            "recall": 1.0,
+            "f1-score": 0.9995035938046157,
+            "support": 170139.0
+        },
+        "accuracy": 0.9995033472631202,
+        "macro avg": {
+            "precision": 0.9995038401014633,
+            "recall": 0.9995033472631202,
+            "f1-score": 0.9995033471406138,
+            "support": 340278.0
+        },
+        "weighted avg": {
+            "precision": 0.9995038401014634,
+            "recall": 0.9995033472631202,
+            "f1-score": 0.9995033471406137,
+            "support": 340278.0
+        }
+    }
+}
