@@ -58,25 +58,21 @@ def plot_precision_recall_curve(y_true,y_probs,model_name='Model',save_path=''):
     precision,recall,_ = precision_recall_curve(y_true,y_probs)
     PR_auc = auc(recall,precision)
 
-    plt.plot(recall,precision,color='darkorange',lw=2)
+    plt.plot(recall,precision,color='darkorange',lw=2,label=f'AUC = {PR_auc:.2f}')
     plt.xlabel('Recall')
     plt.ylabel('Precision')
     plt.title(f'Precision Recall Curve {model_name}')
-
+    plt.legend(loc='upper right')
 
     precision,recall,threshold = precision_recall_curve(y_true,y_probs)
     f1_scores = 2 * (precision * recall) / (precision + recall + 1e-8)
 
-    best_idx = np.argmax(f1_scores)
-    best_threshold = threshold[best_idx] if best_idx < len(threshold) else 0.5
-    best_f1 = f1_scores[best_idx]
 
     if save_path:
         plt.savefig(os.path.join(save_path, f'{model_name}_precision_recall_curve.png'))
 
-    print(f'Best Threshold for {model_name} = {best_threshold:.3f}, Best F1 = {best_f1:.3f}')
     plt.close()
-    return float(best_threshold),PR_auc
+    return PR_auc
 
 
 def plot_roc_curve(y_true,y_prob,model_name='Model',save_path=''):
@@ -112,7 +108,7 @@ def save_metrics(y_true,y_pred,y_prob,model_name='',metrics_path='',plots_path='
 
     plot_confusion_matrix(y_true,y_pred,model_file_name,plots_path)
     plot_roc_curve(y_true,y_prob,model_file_name,plots_path)
-    best_threshold,PR_auc = plot_precision_recall_curve(y_true,y_prob,model_file_name,plots_path)
+    PR_auc = plot_precision_recall_curve(y_true,y_prob,model_file_name,plots_path)
 
 
     metrics = {
@@ -194,6 +190,7 @@ if __name__ == '__main__':
     if not model_file:
         raise FileNotFoundError(f"No .pkl model found in {model_dir}")
 
+    model_name = os.path.splitext(model_file[0])[0].replace('_best', '')
     model_path = os.path.join(model_dir,model_file[0])
     model = joblib.load(model_path)
 
@@ -211,17 +208,10 @@ if __name__ == '__main__':
     X_test = scaler.transform(X_test)
 
 
-    y_pred_train = model.predict(X_train)
-    y_pred_val = model.predict(X_val)
-    y_pred_test = model.predict(X_test)
+    y_pred = model.predict(X_test)
+    y_prob = model.predict_proba(X_test)[:,1]
 
-    f1_train = f1_score(y_train,y_pred_train)
-    f1_val = f1_score(y_val,y_pred_val)
-    f1_test = f1_score(y_test,y_pred_test)
-
-    report = skl_class_report(y_test,y_pred_test)
-    print('Classification Report for test data.')
-    print(report)
+    save_metrics(y_test,y_pred,y_prob,model_name,'results','results','test' )
 
 
 
