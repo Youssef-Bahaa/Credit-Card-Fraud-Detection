@@ -48,7 +48,3 @@ Credit-Card-Fraud-Detection/
 
 Results and figures appear in `results/`.
 
-## Acknowledgements
-
-- Kaggle Credit Card Fraud Dataset
-- scikit-learn, pandas, numpy, matplotlib
